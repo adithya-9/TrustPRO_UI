@@ -117,7 +117,7 @@ export default function ProfilePage() {
         <Card>
           <CardHeader icon={<Camera className="size-5" />} title="Profile photo" description="Required to continue." />
           <div className="p-6">
-            <PhotoInput label="Profile photo" description="A clear, front-facing photo of only you. JPEG, PNG or WebP, up to 8 MB."
+            <PhotoInput label="Profile photo" description="A clear, front-facing photo of only you. JPEG, PNG or WebP, up to 4 MB."
               icon={<UserRound className="size-5" />} existingUrl={existing.profile_photo_url} file={photo} allowCamera
               onChange={(f, err) => { setPhoto(f); setErrors((e) => ({ ...e, profile_photo: err ?? "" })); }}
               error={errors.profile_photo || undefined} />

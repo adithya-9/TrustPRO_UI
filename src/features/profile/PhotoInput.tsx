@@ -7,11 +7,11 @@ import { useCamera, useVideoStream } from "../../hooks/useCamera";
 import { cx } from "../../lib/format";
 
 const ACCEPT = ["image/jpeg", "image/png", "image/webp"];
-const MAX_BYTES = 8 * 1024 * 1024;
+const MAX_BYTES = 4 * 1024 * 1024;
 
 export function validateImage(file: File): string | null {
   if (!ACCEPT.includes(file.type)) return "Choose a JPEG, PNG or WebP image.";
-  if (file.size > MAX_BYTES) return "The image is larger than 8 MB.";
+  if (file.size > MAX_BYTES) return "The image is larger than 4 MB.";
   return null;
 }
 
