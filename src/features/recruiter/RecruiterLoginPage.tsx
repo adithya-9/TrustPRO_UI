@@ -15,8 +15,16 @@ export default function RecruiterLoginPage() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const me = useRecruiter();
-  const [loginId, setLoginId] = useState("");
-  const [password, setPassword] = useState("");
+  // The emailed link carries the login in the URL fragment (#login=...&password=...), which the
+  // browser never sends to a server. Read it once, then remove it from the address bar.
+  const [prefill] = useState(() => {
+    const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const values = { login: params.get("login") ?? "", password: params.get("password") ?? "" };
+    if (values.login || values.password) window.history.replaceState(null, "", window.location.pathname);
+    return values;
+  });
+  const [loginId, setLoginId] = useState(prefill.login);
+  const [password, setPassword] = useState(prefill.password);
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);

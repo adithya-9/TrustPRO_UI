@@ -13,7 +13,9 @@ export interface RecorderState {
   error: string | null;
 }
 
-const TIMESLICE_MS = 3000;
+// 6 s parts: half as many upload requests, which matters when each one crosses Vercel, a tunnel
+// and a remote database.
+const TIMESLICE_MS = 6000;
 const MIME_TYPES = ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm"];
 
 export function pickMimeType(): string | undefined {
@@ -86,7 +88,7 @@ export function useRecorder(interviewId: number) {
       update({ status: "error", error: "This browser cannot record video. Use a recent version of Chrome, Edge or Firefox." });
       return false;
     }
-    const rec = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 1_200_000, audioBitsPerSecond: 64_000 });
+    const rec = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 800_000, audioBitsPerSecond: 64_000 });
     rec.ondataavailable = (e) => {
       if (e.data && e.data.size > 0) {
         queue.current.push(e.data);
