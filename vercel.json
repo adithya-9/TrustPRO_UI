@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://random-words-1234.trycloudflare.com/api/:path*" },
+    { "source": "/api/:path*", "destination": "https://leather-camel-platinum-signed.trycloudflare.com/api/:path*" },
     { "source": "/((?!assets/|favicon.svg).*)", "destination": "/index.html" }
   ]
 }
